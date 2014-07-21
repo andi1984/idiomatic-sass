@@ -50,7 +50,7 @@ Break functionality into smaller objects. Each object should do one thing and do
 
 ### Not location-based
 
-Never, ever use location-based styling. This means a block is never styled different because it is within another block. Objects should have "modifiers" instead of location-related styles `.block--large {}` instead of `#sidebar .block {}`
+Never, ever use location-based styling. This means a module is never styled different because it is within another module. Objects should have "modifiers" instead of location-related styles `.module--large {}` instead of `#sidebar .module {}`
 
 ### Never uses IDs
 
@@ -67,23 +67,33 @@ Enforce these rules by using one of the naming conventions in the next section.
 ## Naming Conventions
 
 It's important that you use a consistent naming convention for your selectors. For this,
-I recommend looking at the [BEM](http://bem.info) or [Montage](http://montagejs.org/docs/Naming-Conventions.html).
+I recommend looking at the [BEM](http://bem.info), [Montage](http://montagejs.org/docs/Naming-Conventions.html) or [SMACCS](https://smacss.com/).
 
 ### BEM
 
 ```scss
-.block-name {}
-.block-name__child-name {}
-.block-name--modifier {}
+.module-name {}
+.module-name__sub-component {}
+.module-name--submodule {}
 ```
 
 ### Montage
 
 ```scss
-.namespace-BlockName {}
-.namespace-BlockName-childName {}
-.namespace-BlockName--modifier {}
+.namespace-ModuleName {}
+.namespace-ModuleName-subComponent {}
+.namespace-ModuleName--subModule {}
 ```
+
+### SMACCS (by [Jonathan Snook](http://snook.ca/))
+
+```scss
+.modulename {}
+.modulename-submodule {}
+.modulename-subcomponent {}
+```
+
+
 
 The most important thing is that you pick one as a team and stick with it.
 
@@ -165,7 +175,7 @@ Here is an example of a well-formed selector:
 
 * Each logical module of code should belong in its own file. Avoiding putting multiple objects in the same file. This allows you to use the filesystem to navigate your Sass rather than relying on comment blocks.
 * Mixins/placeholders/functions should, if possible, belong in their own file.
-* Files should be named for the component they are housing. A `block-list` object will live in a `block-list.scss` file.
+* Files should be named for the component they are housing. A `module-list` object will live in a `module-list.scss` file.
 
 ## Functions
 
@@ -289,7 +299,7 @@ It is assumed that the `components` directory is added as a load path, so packag
 
 #### Object
 
-A single piece of the design, usually fairly small. This could be things like `.message`, `.block`, `.list`, `.post`.
+A single piece of the design, usually fairly small. This could be things like `.message`, `.module`, `.list`, `.post`.
 Objects should be independent. Think of them as lego blocks. Objects have "modifiers" and "children".
 
 #### Children
@@ -308,13 +318,13 @@ A module has a single entry point and a single purpose and role. eg. A grid fram
 When a module is shared with others via a package manager like Bower it will generally be referred to as a package.
 This means that the term "module" and "packages" are fairly interchangable.
 
-#### Block
+#### Module
 
 This is another term for the concept of an "object".
 
 #### Element
 
-When referring to "objects" and "blocks", the word "element" is interchangable with the word "children".
+When referring to "objects" and "modules", the word "element" is interchangable with the word "children".
 
 #### Modifier
 
