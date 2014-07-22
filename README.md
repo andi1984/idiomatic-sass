@@ -93,7 +93,17 @@ I recommend looking at the [BEM](http://bem.info), [Montage](http://montagejs.or
 .modulename-submodule {}
 ```
 
+_Note regarding comparability: BEM and SMACCS use a different syntax to classify their elements. 
+BEM uses `blocks`, `elements`and `modifiers` as the name suggests. In SMACCS `modules`, `components` and `submodules`
+are used instead to classify the different elements. Furthermore SMACCS brings `themes`and `states`
+into play._
 
+_Instead of using `modifiers` as the only way slightly changing a module's layout,
+Jonathan Snook further differentiates between `submodules` (styles applied at render time)
+and `states` (styles indicating a JavaScript dependency, applying layout changes whenever needed)._
+
+_For better comparability a SMACCS like syntax is used here to visualize the pure syntactical differences
+between the different naming conventions._
 
 The most important thing is that you pick one as a team and stick with it.
 
