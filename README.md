@@ -42,7 +42,7 @@ Well-written Sass is:
 
 Objects should never manipulate other objects. eg. `.message` would never change the style of a nested object 
 called `.list`. Instead use child selectors like `.message__list` and use both classes in the markup 
-`<div class="list message__list">` or use a modifier `<div class="message"><div class="list list--small"></div></div>`
+`<div class="list message__list">` or use a modifier/submodule `<div class="message"><div class="list list--small"></div></div>`
 
 ### Specific
 
@@ -89,8 +89,8 @@ I recommend looking at the [BEM](http://bem.info), [Montage](http://montagejs.or
 
 ```scss
 .modulename {}
-.modulename-submodule {}
 .modulename-subcomponent {}
+.modulename-submodule {}
 ```
 
 
@@ -122,7 +122,7 @@ The most important thing is that you pick one as a team and stick with it.
 3. `@include` should appear second. This allows the properties to override the mixins.
 4. Properties should appear after this, optionally grouped by type or sorted alphabetically.
 5. Mixins with content blocks should appear next. `@include someMixin { properties }`
-6. Selectors that target itself. `&.modifier`
+6. Selectors that target itself. `&.submodule`
 7. Child selectors appear last.
 
 The basic rule of thumb is at-rules, properties, then blocks.
@@ -152,7 +152,7 @@ Here is an example of a well-formed selector:
     position: absolute;
   }
 
-  &.selector--modifier {
+  &.selector--submodule {
     background: red;
   }
 
@@ -300,7 +300,7 @@ It is assumed that the `components` directory is added as a load path, so packag
 #### Object
 
 A single piece of the design, usually fairly small. This could be things like `.message`, `.module`, `.list`, `.post`.
-Objects should be independent. Think of them as lego blocks. Objects have "modifiers" and "children".
+Objects should be independent. Think of them as lego blocks. Objects have "modifiers"/"submodules" and "children".
 
 #### Children
 
@@ -326,7 +326,7 @@ This is another term for the concept of an "object".
 
 When referring to "objects" and "modules", the word "element" is interchangable with the word "children".
 
-#### Modifier
+#### Modifier/Submodules
 
 "Objects" may be modified in a way that changes their style in small ways, think of them as themes or alternative
-styles. For example, a `.list` object may have a `.list--small` modifier to make the text smaller.
+styles. For example, a `.list` object may have a `.list--small` modifier (aka submodule) to make the text smaller.
