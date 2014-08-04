@@ -36,6 +36,8 @@ bit of overlap.
 Writing good Sass code starts with correctly dividing and modularizing your objects. It is arguably more
 important than any other aspect of writing CSS.
 
+Bad-written Sass/CSS is [this](http://csswizardry.com/2012/11/code-smells-in-css/)!
+
 Well-written Sass is:
 
 ### Decoupled
