@@ -195,9 +195,14 @@ Here is an example of a well-formed selector:
 * The namespace can be dropped if it is a private function: `columns`
 * Functions should be documented using DocBlock or similar.
 
+## Placeholders
+
+* Placeholders should ever be used for non context-sensitive, static (S)CSS
+* To [get the most out of placeholders](http://hugogiraudel.com/2014/03/31/getting-the-most-out-of-sass-placeholders/) [Hugo Giraudel](https://github.com/HugoGiraudel)'s workaround should be used
+
 ## Mixins
 
-* Mixins should only be used when there are dynamic properties, otherwise use `@extend`
+* Mixins should only be used when there are dynamic properties, otherwise use placeholders via `@extend`
 * Mixins that output selectors should be capital-case: `@mixin GridBuilder`
 * Mixins that output only properties should be camel-case: `@mixin borderBox`
 * Mixins should be prefixed if they are part of a public module: `@mixin as-GridBuilder`
@@ -268,6 +273,7 @@ Example structure:
     /homepage
   /lib
     /mixins
+    /placeholders
     /functions
   bower.json
   index.scss
