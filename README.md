@@ -54,9 +54,9 @@ Break functionality into smaller objects. Each object should do one thing and do
 
 Never, ever use location-based styling. This means a module is never styled different because it is within another module. Objects should have "modifiers" instead of location-related styles `.module--large {}` instead of `#sidebar .module {}`
 
-### Never uses IDs
+### Don't use IDs
 
-Yep, never. You don't need them and they aren't re-usable by nature
+Really avoid using IDs inside your modular Sass due to their high CSS specificity and lack of reusability.
 
 ### Separates layout from style. 
 
@@ -191,7 +191,7 @@ Here is an example of a well-formed selector:
 
 ## Functions
 
-* Functions should be prefix with a dash and a namespace: `-rg-columns`
+* Functions should be prefix with a namespace: `rg-columns`
 * The namespace can be dropped if it is a private function: `columns`
 * Functions should be documented using DocBlock or similar.
 
@@ -199,6 +199,35 @@ Here is an example of a well-formed selector:
 
 * Placeholders should ever be used for non context-sensitive, static (S)CSS
 * To [get the most out of placeholders](http://hugogiraudel.com/2014/03/31/getting-the-most-out-of-sass-placeholders/) [Hugo Giraudel](https://github.com/HugoGiraudel)'s workaround should be used
+* Since defining a placeholder can potentially generate CSS, placeholder definitions should be wrapped inside another mixin.
+
+Extended example from Hugo Giraudel
+````scss
+@mixin clear($extend: true) {
+  @if $extend {
+    @extend %clear;
+  }
+  @else {
+    &:after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+  }
+}
+
+@mixin clear-placeholder() {
+  %clear {
+    @include clear($extend: false);
+  }
+}
+````
+
+To render the actual placeholder css, the ``clear-placeholder`` mixin can be used like this.
+
+````scss
+@include clear-placeholder();
+````
 
 ## Mixins
 
@@ -254,41 +283,28 @@ A few general rules:
 
 ### File Structure
 
-* Third-party, installed modules should always be placed in a `components` directory.
-* Local modules should live in a `local` directory adjacent to the `components` directory.
-* All images, fonts and other assets should live in an `assets` directory
-
 Example structure: 
 
 ```
 /module-name
-  /assets
-    /fonts
-    /images
-  /components
-    /responsive-grid
-    /clearfix
-    /animation
-  /local
-    /homepage
   /lib
     /mixins
     /placeholders
     /functions
-  bower.json
-  index.scss
+    /variables
+  _index.scss
 ```
 
 ### Namespacing
 
 * Every selector, placeholder, mixin and function that is imported should be namespaced
 * Namespaces should be short (2-5 characters) and suffixed with a dash: `rg-Grid`
+* As long as `@import` v2 with namespace and alias support isn't published ([#1094](https://github.com/sass/sass/issues/1094)) namespaces should be used consistently throughout the whole project.
 
 ### Module Entry Point
 
-* Each module should have an `index.scss` file as the entry point: `@import "module-name/index"`. 
-* The entry point file does not require an underscore in the file name as each module should be able to be compiled and used individually.
-* Importing this entry point file should not render anything in the output
+* Each module should have an `_index.scss` file as the entry point: `@import "module-name/index"`. 
+* **Importing this entry point file must not render anything in the output**
 * There must be an **entry-point mixin named for that module**. eg. a `rg-Grid` module would have a `rg-Grid` mixin
 
 ### Package Management
