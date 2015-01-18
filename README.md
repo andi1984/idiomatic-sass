@@ -289,9 +289,13 @@ Example structure:
 /module-name
   /lib
     /mixins
+      _index.scss
     /placeholders
+      _index.scss
     /functions
+      _index.scss
     /variables
+      _index.scss
   _index.scss
 ```
 
@@ -306,6 +310,11 @@ Example structure:
 * Each module should have an `_index.scss` file as the entry point: `@import "module-name/index"`. 
 * **Importing this entry point file must not render anything in the output**
 * There must be an **entry-point mixin named for that module**. eg. a `rg-Grid` module would have a `rg-Grid` mixin
+
+### Lib Subfolder Entry Point
+
+* Each folder inside module-name/lib should have an `_index.scss`file as an entry-point
+* **Importing this entry point file must not render anything in the output**, but import all needed partials from the corresponding directory
 
 ### Package Management
 
